@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Nightlife Voting App</title>
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    	<script src="/app/angularFunctionality.js"></script>
+
+	
+	</head>
+
+	<body ng-app="mainModule" ng-controller="SplashController as splashCtrl" ng-init="splashCtrl.init(<%=JSON.stringify(passedInTerm)%>);">
+		<div class='centered container'>
+			<h1>Plans tonight?</h1>
+			<h3>Find the hottest bars in your area!</h3>
+			<a href='/auth/facebooks' ng-show='!splashCtrl.loggedIn'><button class='btn btn-primary facebookButton' ng-click='splashCtrl.loginWithFacebook()'>Login with Facebook</button></a>
+			<br>
+			<div class='col-md-12'>
+				<input type='text' id='searchBox' class='form-control col-md-8' ng-model='splashCtrl.searchLocation'>
+				<button id='searchSubmit' class='btn btn-default col-md-1' ng-click='splashCtrl.triggerYelpSearch(splashCtrl.searchLocation)'>Go!</button>
+			</div>
+		</div>
+		<div class='container-fluid' style="height:40px">
+			<div ng-repeat="yelpEntry in splashCtrl.searchResults" class='venueEntry'>
+				<div class='row'>
+					<img class='col-md-2 thumbnailPhoto' src={{yelpEntry.thumbnailImage}}>
+					<div class='col-md-8'>
+						<p class='col-md-3'>{{yelpEntry.name}}</p>
+						<p class='col-md-9'>{{yelpEntry.numPplGoing}} going</p>
+						<p class='col-md-12'><i>{{yelpEntry.textSnippet}}</i></p>
+					</div>
+					<div class='col-md-2'>
+						<button class='btn btn-success goingButton' ng-show="splashCtrl.loggedIn && !yelpEntry.going" ng-click="splashCtrl.toggleGoing(yelpEntry)">I'm in!</button>
+						<button class='btn btn-danger goingButton' ng-show="splashCtrl.loggedIn && yelpEntry.going" ng-click="splashCtrl.toggleGoing(yelpEntry)">Nevermind...</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+	<!--<footer>-->
+	<!--	Prepared for free code camp-->
+		
+	<!--</footer>-->
+
+</html>

@@ -14,6 +14,64 @@
   src: local('Roboto Medium'), local('Roboto-Medium'), url('../fonts/Roboto-Medium.ttf') format('truetype');
 }
 
+/****Adam's stuff******/
+body{
+	background-color:lightblue;
+}
+
+.goingButton{
+	-webkit-transform: translate(0px,50%);
+	-moz-transform: translate(0px,50%);
+	-ms-transform: translate(0px,50%);
+	position:absolute;
+	top:50%;
+}
+
+.centered{
+	text-align:center;
+}
+
+.facebookButton{
+	width:300px;
+}
+
+.thumbnailPhoto{
+	height:100px;
+	width:auto;
+}
+
+.venueEntry{
+	margin-left:50px;
+	margin-right:50px;
+	padding:10px;
+	
+}
+
+.venueEntry:hover{
+	background:rgba(255,255,255,0.5);
+	border-style:solid;
+	border-width:1px;
+	border-color:rgba(255,255,255,0.7);
+}
+
+.form-control{
+	width:90%;
+	height:35px;
+	margin:0px;
+}
+
+/*#searchBox{*/
+/*	width:90%;*/
+/*	margin-right:0px;*/
+/*	padding-right:0px;*/
+/*}*/
+
+#searchSubmit{
+	width:10%;
+	height:35px;
+	margin:0px;
+}
+
 /****** Main Styling ******/
 
 body {
@@ -121,14 +179,12 @@ img {
 
 .btn {	/* Styling for buttons */
 	margin: 0 8px;
-	color: white;
-	background-color: #00BCD4;
 	display: inline-block;
 	border: 0;
 	font-size: 14px;
 	border-radius: 3px;
 	padding: 10px 5px;
-	width: 100px;
+	width: 160px;
 	font-weight: 500;
 }
 

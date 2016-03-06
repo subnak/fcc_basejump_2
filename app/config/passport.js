@@ -1,6 +1,7 @@
 'use strict';
 
 var GitHubStrategy = require('passport-github').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/users');
 var configAuth = require('./auth');
 
@@ -49,4 +50,34 @@ module.exports = function (passport) {
 			});
 		});
 	}));
+	
+	passport.use(new FacebookStrategy({
+	    clientID: '1055888537786297',
+	    clientSecret: '6e06c846d9cd4d0d744d6a3453bfb6ca',
+	    callbackURL: "https://fcc-basejump-2-subnak.c9users.io/auth/facebook/callback",
+	    passReqToCallback: true
+	  },
+	  function(req,accessToken, refreshToken, profile, done) {
+	  	console.log('inside facebook passport');
+	  	process.nextTick(function(){
+		  	User.findOne({"facebook.id":profile.id}, function(err,user){
+		  		if(err){
+		  			return done(err);
+		  		}
+		  		if(user){
+		  			return done(null,user);
+		  		}else{
+		  			var newUser = new User();
+		  			newUser.facebook.id=profile.id;
+		  			newUser.facebook.username=profile.displayName;
+		  			newUser.universalInfo.username=profile.username;
+		  			newUser.save(function(err){
+		  				if(err) throw err;
+		  				return done(null,newUser);
+		  			})
+		  		}
+		  	});
+		});
+	}));
+	
 };

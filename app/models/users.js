@@ -10,8 +10,16 @@ var User = new Schema({
 		username: String,
       publicRepos: Number
 	},
+	facebook:{
+	    id: String,
+	    displayName: String,
+	    username: String
+	},
    nbrClicks: {
       clicks: Number
+   },
+   universalInfo:{
+   	displayName:String,
    }
 });
 
